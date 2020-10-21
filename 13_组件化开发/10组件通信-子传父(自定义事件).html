@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--
+props用于父组件向子组件传递数据 还有一种比较常见的是子组件传递数据到父组件中
+什么时候需要自定义事件
+当子组件需要传送数据到父组件时
+v-on不仅仅可以用于监听dom事件还可以用于组件间的自定义事件
+自定义组件流程 
+在子组件中通过$emit()来触发事件
+在父组件中通过v-on来监听子组件事件
+-->
+
+<!--//子组件模板-->
+<div id="app">
+    <cpn @itemclick="aaClick"></cpn>
+</div>
+<!--//父组件模板-->
+<template id="cpn">
+    <div>
+        <button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+    </div>
+</template>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script>
+    //子组件
+    const cpn = {
+        template: `#cpn`,
+        data(){
+            return {
+                categories:[
+                    {id:1,name:'热门推荐'},
+                    {id:2,name:'京东超市'},
+                    {id:3,name:'电暖办公'},
+                    {id:4,name:'女装'},
+                    {id:5,name:'男装'}
+                ]
+            }
+        },
+        methods:{
+            btnClick(item){
+                //子组件向父组件发射数据
+                this.$emit("itemclick",item)
+            }
+        }
+    }
+
+    new Vue({
+        el: '#app',
+        data: {
+        },
+        components: {
+            cpn
+        },
+        methods: {
+            aaClick(item){
+                console.log('aaClick');
+                console.log(item);
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

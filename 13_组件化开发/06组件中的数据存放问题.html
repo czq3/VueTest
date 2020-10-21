@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06组件的中的数据存放问题</title>
+</head>
+<body>
+
+
+<div id="app">
+    <!--<myCpn></myCpn>-->
+    <mycpn></mycpn>
+</div>
+
+
+<!--
+<script type="text/x-template" id="myCpn">
+    <div>
+        <h2>{{msg}}</h2>
+        <p>我是内容，哈哈哈哈哈</p>
+    </div>
+</script>
+-->
+<template id="mycpn">
+    <div>
+        <h2>{{msg}}</h2>
+        <p>我是内容，嘿嘿嘿嘿嘿</p>
+    </div>
+</template>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //全局组件注册的语法糖
+    Vue.component('mycpn', {
+        template: `#mycpn`,
+        data() {
+            return {
+                msg: 'abc'
+            }
+        }
+    })
+
+    //局部组件注册的语法糖
+    new Vue({
+        el: '#app',
+        data: {}
+    })
+</script>
+</body>
+</html>

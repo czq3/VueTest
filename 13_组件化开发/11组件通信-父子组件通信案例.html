@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件通信案例</title>
+</head>
+<body>
+<div id="app">
+    <cpn :number1="num1" :number2="num2" @num1change="num1change" @num2change="num2change"></cpn>
+</div>
+
+<template id="cpn">
+    <div>
+        <!--不能通过子组件去改变父组件的值,所以通过在data函数里面定义变量来改变子组件的值-->
+        <!--通过变量改变父组件里面的值-->
+        <h2>props:{{number1}}</h2>
+        <h2>datas:{{dnumber1}}</h2>
+        <input type="text" :value="dnumber1" @input="Inputnum1">
+        <!-- <input type="text" v-model="number1">-->
+        <h2>props:{{number2}}</h2>
+        <h2>datas:{{dnumber2}}</h2>
+        <input type="text" :value="dnumber2" @input="Inputnum2">
+        <!-- <input type="text" v-model="number2">-->
+    </div>
+</template>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //子组件
+    const cpn = {
+        template: `#cpn`,
+        props: {
+            number1: Number,
+            number2: Number
+        },
+        data() {
+            return {
+                dnumber1: this.number1,
+                dnumber2: this.number2
+            }
+        },
+        methods: {
+            /*input框的值赋值给dnumber1 dnumber2并且发射当前值的数据*/
+            Inputnum1(event) {
+                this.dnumber1 = event.target.value
+                //同时修饰dnumber2的值
+                this.dnumber2=this.dnumber1*100;
+                this.$emit('num2change', this.dnumber2)
+            },
+            Inputnum2(event) {
+                this.dnumber2 = event.target.value
+                //同时修饰dnumber1的值
+                this.dnumber1=this.dnumber2/100;
+                this.$emit('num1change', this.dnumber1)
+            }
+        }
+    }
+
+    //父组件
+    new Vue({
+        el: '#app',
+        data: {
+            num1: 1,
+            num2: 1,
+        },
+        methods: {
+            /*把传过来的值赋值给父组件的num1和num2*/
+            num1change(value) {
+                this.num1 = parseFloat(value)
+            },
+            num2change(value) {
+                this.num2 = parseFloat(value)
+            }
+        },
+        components: {
+            cpn
+            /* cpn:{
+                 template:`#cpn`,
+                 props:{
+                     number1:Number,
+                     number2:Number
+                 },
+                 data(){
+                     return{
+                         dnumber1:this.number1,
+                         dnumber2:this.number2
+                     }
+                 }
+             }*/
+
+        }
+    })
+
+</script>
+</body>
+</html>

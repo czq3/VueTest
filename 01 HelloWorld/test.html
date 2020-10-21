@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app"><!--view-->
+    <input type="text" v-model="username">
+    <p>Hello {{username}}</p>
+        <!--<p v-text="name"></p>-->
+    </div>
+    <p>{{name}}</p>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //let(变量)/const(常量)
+    //创建Vue实例(VM)
+    const vm=new Vue({//配置对象
+       el: '#app',//element:选择器
+        data:{ //数据（model）
+            username:'czq'
+        }
+    })
+    /*vm.name='aasas'*/
+</script>
+
+<!--MVVM
+M(Model 模型):Vue实例中的data数据
+V(View 视图):视图
+VM（ViewModel 视图模型）:Vue实例
+-->
+</body>
+</html>

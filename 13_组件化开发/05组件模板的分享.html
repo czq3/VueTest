@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05-组件模板的分享</title>
+</head>
+<body>
+<div id="app">
+    <mycpn></mycpn>
+    <mycpn2></mycpn2>
+</div>
+
+
+<script type="text/x-template" id="mycpn">
+    <div>
+        <h2>我是标题</h2>
+        <p>我是内容，哈哈哈哈哈</p>
+    </div>
+</script>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+
+<template id="mycpn2">
+    <div>
+        <h2>我是标题</h2>
+        <p>我是内容，嘿嘿嘿嘿嘿</p>
+    </div>
+</template>
+<script type="text/javascript">
+    //全局组件注册的语法糖
+    Vue.component('mycpn', {
+        template: `#mycpn`
+    })
+
+    //局部组件注册的语法糖
+    new Vue({
+        el: '#app',
+        data: {
+
+        },
+        components:{'mycpn2':{
+            template: `#mycpn2`
+           }
+         }
+    })
+</script>
+</body>
+</html>

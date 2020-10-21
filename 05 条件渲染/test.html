@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--v-if v-else和v-show的区别在于v-if是把标签移除而v-show是通过display:none(bock)隐藏和显示标签    -->
+<div id="demo">
+
+    <p v-if="ok">成功</p>
+    <p v-else>失败</p>
+
+    <p v-show="ok">表白成功</p>
+    <p v-show="!ok">表白失败</p>
+
+    <button @click="ok=!ok">切换</button> <!--取当前的ok值的反值再赋值给OK-->
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el:'#demo',
+        data:{
+            ok:true,
+        }
+    })
+</script>
+</body>
+</html>

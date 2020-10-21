@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父组件和子组件</title>
+</head>
+<body>
+
+<!--
+父子组件的生命周期
+1.初始化显示
+父beforeCreate---父created---父beforeMount
+子beforeCreate---子created---子beforeMount---子Mounted---父----Mounted
+2.更新状态
+父beforeUpdate->子beforeUpdate->子updated->父updated
+3.销毁状态
+父beforeDestroy->子beforeDestroy->子destroyed->父destroyed
+-->
+
+<div id="app">
+    <cpna></cpna>
+    <cpnb></cpnb>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //1.创建第一个组件构造器（子组件）
+    const cpna = Vue.extend({
+        template: `
+    <div>
+        <h2>我是标题1</h2>
+        <p>我是内容1，哈哈哈哈哈</p>
+    </div>
+    `
+    })
+
+    //1.创建第二个组件构造器*（父组件）
+    const cpnb = Vue.extend({
+        template: `
+            <div>
+                <h2>我是标题2</h2>
+                <p>我是内容2，嘿嘿嘿嘿嘿</p>
+                <cpna></cpna>
+            </div>
+        `,
+        //作用域仅用于cpnb
+        components: {
+            //此处的名字必须和定义的名字一致
+            cpna: cpna
+        }
+    })
+    //2.注册组件(全局组件，意味着可以在多个Vue实例下使用)
+    //Vue.component('cpn',cpn)
+
+    //定义局部组件
+    new Vue({
+        el: '#app',
+        data: {
+            message: '你好啊大笨猪'
+        },
+        components: {
+            //此处的名字必须和定义的名字一致
+            cpnb: cpnb
+        }
+    })
+</script>
+</body>
+</html>

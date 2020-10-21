@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-leave-active {
+        / / animation: bounce-in .5 s reverse;
+        }
+
+        @keyframes bounce-in {
+            /*再到消失*/
+            0% {
+                transform: scale(0);
+            }
+            /*然后放大1.5倍*/
+            50% {
+                transform: scale(1.5);
+            }
+            /*起始1*/
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<center>
+    <div id="example-2">
+        <button @click="show = !show">Toggle show</button>
+        <br>
+        <transition name="bounce">
+            <p v-if="show" style="display: inline-block">
+                <img :src="imgURL" style="width:1200px;height:700px;">
+            </p>
+        </transition>
+    </div>
+    <center>
+        <script type="text/javascript" src="../js/vue.js"></script>
+        <script type="text/javascript">
+            new Vue({
+                el: '#example-2',
+                data: {
+                    show: true,
+                    imgURL: '../img/ddrb.jpg'
+                }
+            })
+        </script>
+</body>
+</html>

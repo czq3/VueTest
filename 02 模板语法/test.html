@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+</head>
+<body>
+<div id="app">
+    <h2>1.双大括号表达式</h2>
+    <p>{{msg}}</p>
+    <p>{{msg.toUpperCase()}}</p>
+    <p v-text="msg"></p><!--textContent-->
+    <p v-html="msg"></p><!--innerHTML-->
+    <h2>2.指令一：强制数据绑定</h2>
+    <img src="imgURL"><br>
+    <img v-bind:src="imgURL"><br>
+    <img :src="imgURL">
+    <h2>3.指令二：绑定事件监听 </h2>
+    <button v-on:click="test">点击一下</button>
+    <button @click="test2('大笨猪')">点击一下</button>
+
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+new Vue({
+    el:'#app',
+    data:{
+        msg:'<a href="http://www.haochenit.com">Hello dazhuzhu</a>',
+        imgURL:'https://cn.vuejs.org/images/logo.png'
+    },
+    methods:{
+       test(){
+           alert('哈哈,点击了就是大笨猪!!!');
+       },
+        test2(content){
+           alert(content);
+        }
+    }
+})
+
+</script>
+</body>
+</html>

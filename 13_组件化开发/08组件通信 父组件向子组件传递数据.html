@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08组件通信 父组件向子组件传递数据</title>
+</head>
+<body>
+<div id="app">
+    <cpn :cmovies="movies" :cmessage="message"></cpn>
+</div>
+<template id="cpn">
+    <div>
+        <ul>
+            <li v-for="item in cmovies">{{item}}</li>
+        </ul>
+        <h2>{{cmovies}}</h2>
+        <p>{{cmessage}}</p>
+    </div>
+</template>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //父传子 propos
+    const cpn = {
+        template: `#cpn`,
+        //props: ['cmovies', 'cmessage'],
+        props:{
+            //1.数据类型限制
+            //cmovies:Array,
+            //cmessage:String
+            //提供默认数据
+            cmessage:{
+                type:String,
+                default:'aaaaaa',
+                //必须传数据
+                required:true
+            },
+            //如果类型是对象和数组时，设置默认值必须是函数
+            cmovies:{
+                type:Array,
+                default(){
+                    return []
+                }
+            }
+        },
+        data(){
+           return {}
+        },
+
+    }
+
+    new Vue({
+        el: '#app',
+        data: {
+            movies: ['海贼王', '派大星', '海绵宝宝'],
+            message: '嗨喽，大笨猪'
+        },
+        components: {
+            cpn
+        }
+
+    })
+</script>
+</body>
+</html>

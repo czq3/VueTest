@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06_列表渲染_过滤与排序</title>
+</head>
+<body>
+<div id="test">
+    <input type="text" v-model="searchName">
+    <ul>
+            <li v-for="(p,index) in filterPersons">
+            {{index}}---{{p.name}}----{{p.age}}
+        </li>
+    </ul>
+    <button @click="setOrderAge(1)">年龄升序</button>
+    <button @click="setOrderAge(2)">年龄降序</button>
+    <button @click="setOrderAge(0)">原本顺序</button>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '#test',
+        data: {
+            searchName:'',
+            orderAge:0,
+            persons: [
+                {name: 'Tom', age: 16},
+                {name: 'Jack', age: 17},
+                {name: 'Bob', age: 18},
+                {name: 'YSF', age: 30}
+            ]
+        },
+        computed:{
+            filterPersons(){
+                const {searchName,persons,orderAge}=this
+                let fPersons
+                //进行过滤 查找name中有没有输入的值
+                fPersons=persons.filter(p => p.name.indexOf(searchName)!=-1)
+                //排序 1代表升序 2代表降序
+                if(orderAge!==0){
+                    //经过sort排序后
+                    fPersons.sort(function (p1,p2) {//如果返回负数p1在前 返回正数p2在前
+                    if(orderAge===1){
+                        //10-20
+                        return p1.age-p2.age
+                    }else{
+                        //20-10
+                        return p2.age-p1.age
+                    }
+                    })
+                }
+                return fPersons
+            }
+        },
+        methods:{
+            setOrderAge(orderAge){
+                this.orderAge=orderAge;
+            }
+        }
+    })
+</script>
+</body>
+</html>
